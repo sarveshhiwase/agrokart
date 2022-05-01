@@ -779,6 +779,12 @@ input {
   padding: 0.5rem;
 }
 
+.product__detailqc textarea {
+  resize: vertical;
+  border-radius: 5px;
+  min-height: 150px;
+}
+
 .product__detaila {
   display: flex;
   flex-direction: column;
@@ -954,17 +960,19 @@ input {
 
 /* The Modal (background) */
 .sell {
+  background: url('https://images.pexels.com/photos/265216/pexels-photo-265216.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1')
+    no-repeat;
   /* background-color: rgba(255, 255, 255, 0.8); */
   height: 100%; /* Full height */
   width: 100%; /* Full width */
+  padding: 2em;
 }
 
 /* Modal Content/Box */
 .sell__content {
   background-color: #fefefe;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-  margin: 15% auto; /* 15% from the top and centered */
-  margin-top: 10%;
+  margin: 0 auto;
   width: 27rem; /* Could be more or less, depending on screen size */
 }
 
@@ -1006,7 +1014,8 @@ input {
   display: none !important;
 }
 
-.sell__form input {
+.sell__form input,
+textarea {
   background-color: #f3f4f6;
   border-radius: 999px;
   border: 1px solid #e5e7eb;
@@ -1015,6 +1024,12 @@ input {
   margin-bottom: 0.75rem;
   padding: 0.875rem 1rem;
   width: 100%;
+}
+
+.sell__form textarea {
+  resize: vertical;
+  border-radius: 5px;
+  min-height: 300px;
 }
 
 .sell__upload {

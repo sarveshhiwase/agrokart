@@ -141,8 +141,9 @@ const Sell = () => {
             placeholder="Product Price"
             ref={productPriceRef}
           />
-          <input
+          <textarea
             type="text"
+            className="sell__description"
             placeholder="Product Description"
             ref={productDescriptionRef}
           />

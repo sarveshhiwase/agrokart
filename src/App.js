@@ -9,7 +9,6 @@ import Home from './components/home/Home';
 import Loading from './components/common/Loading';
 import Login from './components/login/Login';
 import Menu from './components/menu/Menu';
-import Payment from './components/payment/Payment';
 import PrivateRoute from './components/common/PrivateRoute';
 import ProductDetail from './components/detail/ProductDetail';
 import Search from './components/search/Search';
@@ -31,7 +30,6 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute exact path="/myprofile" component={Profile} />
-          <PrivateRoute exact path="/payment" component={Payment} />
           <PrivateRoute exact path="/chat" component={Chat} />
           <PrivateRoute exact path="/seller" component={ChatWithSeller} />
           <PrivateRoute exact path="/search" component={SearchProducts} />

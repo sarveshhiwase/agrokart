@@ -53,7 +53,6 @@ export const getDataRealtime = ({ ref, callback }) => {
 };
 
 export const getDataRealtimeQuery = ({ ref, query, criteria, callback }) => {
-  console.log(criteria);
   ref.current
     .orderByChild(query)
     .equalTo(criteria)

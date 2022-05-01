@@ -102,7 +102,6 @@ const SignUp = (props) => {
   const generateAvatar = () => {
     const avatars = [
       'https://cdn-icons-png.flaticon.com/512/206/206865.png',
-      'https://cdn-icons.flaticon.com/png/512/3445/premium/3445119.png?token=exp=1650864751~hmac=e75f6642233058260353498e7978c419',
       'https://cdn-icons-png.flaticon.com/512/3319/3319221.png',
     ];
     const avatarPosition = Math.floor(Math.random() * avatars.length);
