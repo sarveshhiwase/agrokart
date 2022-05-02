@@ -792,17 +792,22 @@ input {
 }
 
 .product__detaila button {
-  border-radius: 999px;
+  border-radius: 10px;
   border: none;
   color: #fff;
   font-weight: bold;
   outline: none;
-  padding: 1rem 0;
+  padding: 1rem;
 }
 
 .product__detaila button:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.product__detaila button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .product__detaila button:nth-child(1) {
