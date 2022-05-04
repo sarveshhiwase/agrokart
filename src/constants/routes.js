@@ -9,3 +9,4 @@ export const SELLER = '/seller';
 export const DETAIL = '/detail';
 export const MYSELL = '/mysells';
 export const MYPROFILE = '/myprofile';
+export const POST_DETAILS = '/postdetails';

@@ -19,6 +19,7 @@ import './index.css';
 import Sell from './components/sell/Sell';
 import Mysells from './components/mysells/Mysells';
 import Profile from './components/profile/Profile';
+import SellerPostDetails from './components/postdetails/SellerPostDetails';
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
           <PrivateRoute exact path="/sell" component={Sell} />
           <PrivateRoute exact path="/mysells" component={Mysells} />
           <PrivateRoute exact path="/wishlist" component={Wishlist} />
+          <PrivateRoute
+            exact
+            path="/postdetails/:id"
+            component={SellerPostDetails}
+          />
           <Route exact path="/login">
             <Login />
           </Route>

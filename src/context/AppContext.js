@@ -15,7 +15,6 @@ export const AppContext = ({ children }) => {
 
   const initAuthUser = () => {
     const authenticatedUser = localStorage.getItem('auth');
-    console.log(authenticatedUser);
     if (authenticatedUser) {
       setUser(JSON.parse(authenticatedUser));
     }

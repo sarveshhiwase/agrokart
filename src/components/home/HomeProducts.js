@@ -23,9 +23,9 @@ const HomeProducts = ({ products }) => {
   };
 
   return (
-    <div className="home__product">
+    <div className="mx-auto w-4/5 ">
       <HomeSectionTitle title={'Daily Deals'} />
-      <div className="home__productc">
+      <div className="flex flex-wrap gap-8">
         {products && products.length === 0 && <h3>No products to show.</h3>}
         {products &&
           products.length !== 0 &&

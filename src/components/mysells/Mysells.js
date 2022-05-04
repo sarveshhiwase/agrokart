@@ -1,20 +1,19 @@
 import { useState, useEffect, useRef, useCallback, useContext } from 'react';
-// import { useHistory } from 'react-router';
 
 // import SearchCategories from './SearchCategories';
 // import SearchProductItem from './SearchProductItem';
 // SearchProductItem
 
 import * as firebaseService from '../../services/firebase';
-import * as storageService from '../../services/storage';
 import * as routeService from '../../services/route';
 
 import * as FIREBASE_KEYS from '../../constants/firebase-keys';
-import * as STORAGE_KEYS from '../../constants/storage-keys';
 import * as ROUTES from '../../constants/routes';
 
 import { Context } from '../../context/AppContext';
-import SearchProductItem from '../search/SearchProductItem';
+// import SearchProductItem from '../search/SearchProductItem';
+import { useHistory } from 'react-router';
+import HomeProductItem from '../home/HomeProductItem';
 
 const Mysells = () => {
   const [products, setProducts] = useState([]);
@@ -24,12 +23,11 @@ const Mysells = () => {
 
   const { user } = useContext(Context);
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const transformData = useCallback(
     (data) => {
       if (!data || !data.length || !user) return data;
-      console.log(data);
       return data.filter((product) => product && product.createdBy === user.id);
     },
     [user]
@@ -37,7 +35,6 @@ const Mysells = () => {
 
   const onDataLoaded = useCallback(
     (val) => {
-      console.log(val);
       if (val) {
         const keys = Object.keys(val);
         const data = keys.map((key) => val[key]);
@@ -46,6 +43,20 @@ const Mysells = () => {
     },
     [transformData]
   );
+
+  const sellClick = () => {
+    routeService.navigate({ route: ROUTES.SELL, push: history.push });
+  };
+
+  const postDetailsClick = (product) => () => {
+    if (product) {
+      console.log(product);
+      routeService.navigate({
+        route: ROUTES.POST_DETAILS + `/${product.id}`,
+        push: history.push,
+      });
+    }
+  };
 
   const loadProducts = useCallback(() => {
     firebaseService.getDataRealtime({
@@ -72,15 +83,25 @@ const Mysells = () => {
       </div> */}
       {products && products.length === 0 && (
         <h3>
-          No posts yet, add one <a href="/sell"> now</a> to sell your agro
-          products.
+          No posts yet, add one{' '}
+          <span className="link-button" onClick={sellClick}>
+            {' '}
+            now
+          </span>{' '}
+          to sell your agro products.
         </h3>
       )}
       {products && products.length !== 0 && (
-        <div className="search__rem">
-          {products.map((product) => (
-            <SearchProductItem key={product.id} product={product} />
-          ))}
+        <div className="flex justify-evenly items-center gap-4">
+          {products &&
+            products.length !== 0 &&
+            products.map((product) => (
+              <HomeProductItem
+                key={product.id}
+                product={product}
+                onProductClicked={postDetailsClick}
+              />
+            ))}
         </div>
       )}
 
