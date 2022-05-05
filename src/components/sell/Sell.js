@@ -101,13 +101,7 @@ const Sell = () => {
       <div className="sell__content">
         <div className="sell__container">
           <div className="sell__title">Sell Product</div>
-          <div className="sell__close">
-            {/* <img
-              alt="close"
-              onClick={() => toggleModal(false)}
-              src="https://static.xx.fbcdn.net/rsrc.php/v3/y2/r/__geKiQnSG-.png"
-            /> */}
-          </div>
+          <div className="sell__close"></div>
         </div>
         <div className="sell__subtitle"></div>
         <div className="sell__form">

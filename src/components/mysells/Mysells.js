@@ -77,12 +77,9 @@ const Mysells = () => {
   }, [tempRef]);
 
   return (
-    <div className="search__re">
-      {/* <div className="search__rel">
-        <SearchCategories />
-      </div> */}
+    <div className="mx-auto w-4/5 min-h-screen">
       {products && products.length === 0 && (
-        <h3>
+        <h3 className="text-xl font-bold text-center text-gray-700">
           No posts yet, add one{' '}
           <span className="link-button" onClick={sellClick}>
             {' '}
@@ -92,7 +89,7 @@ const Mysells = () => {
         </h3>
       )}
       {products && products.length !== 0 && (
-        <div className="flex justify-evenly items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           {products &&
             products.length !== 0 &&
             products.map((product) => (

@@ -9,19 +9,12 @@ import * as storageService from '../../services/storage';
 import * as ROUTE from '../../constants/routes';
 import * as STORAGE_KEYS from '../../constants/storage-keys';
 
-// import arrow from '../../images/arrow.svg';
-import search from '../../images/search.png';
-
 const Search = () => {
   const searchRef = useRef(null);
 
   const { user } = useContext(Context);
 
   const history = useHistory();
-
-  const home = () => {
-    routeService.navigate({ route: ROUTE.HOME, push: history.push });
-  };
 
   const searchProducts = (e) => {
     e.preventDefault();

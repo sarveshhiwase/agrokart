@@ -24,3 +24,5 @@ yarn-error.log*
 
 .env
 MOCK.md
+
+modules.txt

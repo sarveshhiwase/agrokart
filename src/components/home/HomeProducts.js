@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router';
 
-import HomeSectionTitle from './HomeSectionTitle';
 import HomeProductItem from './HomeProductItem';
 
 import * as storageService from '../../services/storage';
@@ -24,9 +23,12 @@ const HomeProducts = ({ products }) => {
 
   return (
     <div className="mx-auto w-4/5 ">
-      <HomeSectionTitle title={'Daily Deals'} />
       <div className="flex flex-wrap gap-8">
-        {products && products.length === 0 && <h3>No products to show.</h3>}
+        {products && products.length === 0 && (
+          <h3 className="text-xl font-bold text-center text-gray-700">
+            No products to show.
+          </h3>
+        )}
         {products &&
           products.length !== 0 &&
           products.map((product) => (

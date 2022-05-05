@@ -2,9 +2,9 @@ const SearchProductItem = ({ product, onProductClicked }) => {
   if (!product) return <></>;
   return (
     <>
-      <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-60 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <img
-          className="rounded-t-lg w-52 h-52 object-cover"
+          className="rounded-t-lg w-60 h-60 object-cover"
           src={product.image}
           alt={product.name}
         />

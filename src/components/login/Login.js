@@ -19,9 +19,12 @@ import * as STORAGE_KEYS from '../../constants/storage-keys';
 
 // import firebase from 'firebase/app';
 import 'firebase/auth';
+import NavbarIcon from '../common/NavbarIcon';
+import useDarkMode from '../Darkmode';
 
 const Login = (props) => {
   const { toggleModal } = props;
+  const [darkMode, setDarkMode] = useDarkMode();
 
   const { cometChat, setUser } = useContext(Context);
 
@@ -45,7 +48,7 @@ const Login = (props) => {
 
   useEffect(() => {
     const authedUser = JSON.parse(storageService.get(STORAGE_KEYS.AUTH));
-    console.log(authedUser);
+    // console.log(authedUser);
     if (authedUser) {
       routeService.navigate({ route: ROUTES.HOME, push: history.push });
     } else {
@@ -69,7 +72,11 @@ const Login = (props) => {
           criteria: email,
         });
         await cometChatService.login({ cometChat, user });
-        saveAuthedInfo(user);
+        if (user) saveAuthedInfo(user);
+        else {
+          removeAuthInfo();
+          throw Error('User not found');
+        }
         uiService.hideLoading();
         routeService.navigate({ route: ROUTES.HOME, push: history.push });
       } else {
@@ -100,9 +107,15 @@ const Login = (props) => {
     });
   };
 
+  const removeAuthInfo = () => {
+    storageService.remove({
+      key: STORAGE_KEYS.AUTH,
+    });
+  };
+
   return (
     <>
-      <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+      <nav class="bg-[inherit] border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
           <a href="/" class="flex items-center">
             <img
@@ -117,10 +130,41 @@ const Login = (props) => {
           <div class="flex md:order-2">
             <a
               href="#login-form"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-4 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Join Now
             </a>
+            <NavbarIcon
+              icon={
+                darkMode ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-6 w-6`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className={`h-8 w-8`}
+                  >
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                )
+              }
+              click={() => setDarkMode(!darkMode)}
+              text="Dark Mode"
+            />
           </div>
           <div
             class=" justify-between items-center w-full md:flex md:w-auto md:order-1"
@@ -157,14 +201,16 @@ const Login = (props) => {
           </div>
         </div>
       </nav>
-      <div className=" homepage-banner relative">
+      <div className=" homepage-banner relative shadow-xl">
         <div className="w-full h-full absolute flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-extrabold text-white">
+          <h1 className="text-3xl font-extrabold text-white p-2">
             All agriculture problems solution in one place.
           </h1>
-          <p text-2xl font-bold>
+          <p className="text-2xl font-bold text-white">
             {' '}
-            Where You meet your perfect seller and buyer.
+            Where You meet your perfect{' '}
+            <span className="text-green-500">Seller</span> and{' '}
+            <span className="text-green-500">Buyer</span>
           </p>
         </div>
       </div>
@@ -184,9 +230,9 @@ const Login = (props) => {
         <div className="w-full md:w-1/2 flex  justify-center items-center">
           <form
             id="login-form"
-            className="w-96 p-4 md:p-4 shadow-xl rounded-lg bg-[#fff]"
+            className="w-96 p-4 md:p-4 shadow-xl rounded-lg dark:bg-gray-700 bg-[#fff]"
           >
-            <h3 className="text-2xl p-2 mb-2 text-center text-blue-800 font-bold">
+            <h3 className="text-2xl p-2 mb-2 text-center text-blue-600 font-bold">
               Join Agrokart Now!
             </h3>
             <div class="mb-6">
@@ -223,11 +269,18 @@ const Login = (props) => {
             <div className="mx-auto w-full">
               <button
                 type="submit"
-                class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="text-white w-auto md:w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800"
                 onClick={login}
               >
-                Submit
+                Login
               </button>
+              <span
+                type="button"
+                class="text-blue-600 font-bold cursor-pointer underline  underline-offset-8 decoration-sky-500   w-auto md:w-full focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm my-1 px-5 py-2 text-center   dark:focus:ring-blue-800"
+                onClick={() => toggleModal(true)}
+              >
+                Create an account now.
+              </span>
             </div>
           </form>
           {/* <div className="login__form " id="login-form">
