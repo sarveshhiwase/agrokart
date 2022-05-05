@@ -1,7 +1,3 @@
-# How to Build a EBay Clone
-
-Read the full tutorial here: [**>> How to Build a EBay Clone**](https://www.cometchat.com/tutorials/#)
-
 ## Technology
 
 This demo uses:
