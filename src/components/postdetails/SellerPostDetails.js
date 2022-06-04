@@ -10,12 +10,13 @@ const SellerPostDetails = () => {
   useEffect(() => {
     const dbproduct = firebase.database().ref('products').child(id);
     dbproduct.on('value', (snapshot) => {
-      setProduct(snapshot.val());
+      const value = snapshot.val();
+      if (value) setProduct(value);
     });
   }, [id]);
   return (
     <>
-      {product !== null && (
+      {product && (
         <div className="min-h-screen">
           <div class="flex mx-auto flex-col items-center bg-white rounded-lg border shadow-md w-full md:min-w-max p-4 md:p-8 dark:border-gray-700 dark:bg-gray-800 ">
             <img
@@ -34,25 +35,29 @@ const SellerPostDetails = () => {
                 {product.description}
               </p>
             </div>
-            {product.interested != null && product.interested.length !== 0 && (
-              <div class=" max-w-md bg-white rounded-lg border shadow-md p-4 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
-                <div class="flex justify-between items-center mb-4">
-                  <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                    Latest Bidders
-                  </h5>
+            {product &&
+              product.interested &&
+              product.interested !== null &&
+              product.interested.length !== 0 && (
+                <div class=" max-w-md bg-white rounded-lg border shadow-md p-4 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+                  <div class="flex justify-between items-center mb-4">
+                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                      Latest Bidders
+                    </h5>
+                  </div>
+                  <div class="flow-root">
+                    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                      {product.interested.map((user) => (
+                        <li class="py-3 sm:py-4">
+                          <InterestedBuyers key={user.user} user={user} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div class="flow-root">
-                  <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-                    {product.interested.map((user) => (
-                      <li class="py-3 sm:py-4">
-                        <InterestedBuyers key={user.user} user={user} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-            {(product.interested === null ||
+              )}
+            {(!product ||
+              product.interested === null ||
               product.interested === undefined ||
               product.interested.length === 0) && (
               <div class="flex justify-between items-center mb-4">

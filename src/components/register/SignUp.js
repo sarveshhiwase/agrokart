@@ -53,7 +53,11 @@ const SignUp = (props) => {
         );
       }
     } catch (error) {
+      console.log(error);
       uiService.hideLoading();
+      uiService.alert(
+        `Cannot create your account, email might be existed, please try again!`
+      );
     }
   };
 

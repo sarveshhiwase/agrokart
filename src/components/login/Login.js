@@ -33,22 +33,8 @@ const Login = (props) => {
 
   const history = useHistory();
 
-  // const signInWithGoogle = () => {
-  //   const auth = firebase.auth();
-  //   const googleProvider = new firebase.auth.GoogleAuthProvider();
-  //   auth
-  //     .signInWithPopup(googleProvider)
-  //     .then((res) => {
-  //       console.log(res.user);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
-
   useEffect(() => {
     const authedUser = JSON.parse(storageService.get(STORAGE_KEYS.AUTH));
-    // console.log(authedUser);
     if (authedUser) {
       routeService.navigate({ route: ROUTES.HOME, push: history.push });
     } else {
@@ -86,6 +72,7 @@ const Login = (props) => {
     } catch (error) {
       console.log(error);
       uiService.hideLoading();
+      alert('Error User not found with those credentials');
     }
   };
 
@@ -263,6 +250,7 @@ const Login = (props) => {
                 id="password"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 ref={passwordRef}
+                placeholder="Enter your password"
                 required
               />
             </div>
@@ -283,21 +271,6 @@ const Login = (props) => {
               </span>
             </div>
           </form>
-          {/* <div className="login__form " id="login-form">
-            <input
-              type="text"
-              placeholder="Email or phone number"
-              ref={emailRef}
-            />
-            <input type="password" placeholder="Password" ref={passwordRef} />
-            <button className="login__submit-btn" onClick={login}>
-              Login
-            </button>
-            <span className="login__forgot-password">Forgot password?</span>
-            <span className="login__signup" onClick={() => toggleModal(true)}>
-              Create New Account
-            </span>
-          </div> */}
         </div>
       </div>
     </>

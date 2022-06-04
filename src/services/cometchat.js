@@ -8,7 +8,7 @@ export const createAccount = async ({ cometChat, id, fullname, avatar }) => {
 
 export const createGroup = async ({ cometChat, guid, name }) => {
   const groupType = cometChat.GROUP_TYPE.PUBLIC;
-  const password = "";
+  const password = '';
   const group = new cometChat.Group(guid, name, groupType, password);
   await cometChat.createGroup(group);
 };
