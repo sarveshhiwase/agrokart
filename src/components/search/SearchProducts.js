@@ -46,13 +46,12 @@ const SearchProducts = () => {
   const loadProducts = useCallback(
     (keywords) => {
       keywords = keywords.toLowerCase().trim().split(' ');
-      console.log(keywords);
       firebase
         .database()
         .ref('products')
         .on('value', (snapshot) => {
           let prods = snapshot.val();
-          let filterProducts = [];
+          let filterProducts = new Set();
           for (const [key, prod] of Object.entries(prods)) {
             let prodDesc = prod.description;
             let prodName = prod.name;
@@ -64,11 +63,12 @@ const SearchProducts = () => {
                 prodName &&
                 (prodDesc.includes(keyword) || prodName.includes(keyword))
               ) {
-                filterProducts.push(prod);
+                filterProducts.add(prod);
               }
             });
           }
-          onDataLoaded(filterProducts);
+          let filterarray = [...filterProducts];
+          onDataLoaded(filterarray);
         });
     },
     [onDataLoaded]
