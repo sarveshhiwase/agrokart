@@ -1,11 +1,9 @@
 # 🍃Agrokart
 
-- ## All agriculture problem's solution in one place.
-- ## Direct communication between seller and buyer
-- ## Seamless fast chat options with seller and buyer.
-- ## Clean and best UI
-
-<hr>
+- ### All agriculture problem's solution in one place.
+- ### Direct communication between seller and buyer
+- ### Seamless fast chat options with seller and buyer.
+- ### Clean and best UI
 
 ## Technologies Used
 
